@@ -1,0 +1,10 @@
+
+scalar Token
+
+extend type Query {
+	inigo : Inigo
+}
+
+type Inigo {
+	profile(token: Token!) : String!
+}
