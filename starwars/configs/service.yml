@@ -1,0 +1,49 @@
+name: starwars
+kind: Service
+spec:
+  path_user_role: jwt.user_role
+  path_user_name: jwt.user_name
+  polling_interval_schema: 300
+  polling_interval_profile: 5
+  schema_files:
+  - ../schema/schema.graphql
+  - ../schema/inigo.graphql
+  profiles:
+  - name: guest
+    max_depth:  3
+    max_height: 10
+    max_directives: 5
+    require_operation_name: true
+    max_request_size_bytes: 512000
+    max_response_size_bytes: 2048000
+    access: access/guest.inigo
+    introspection_mode: FULL
+    rate_limit:
+      mode: static
+      credits_per_minute: 1000
+      calls_per_minute: 100
+  - name: admin
+    max_depth: 5
+    max_height: 100
+    max_operations: 1
+    max_request_size_bytes: 51200
+    max_response_size_bytes: 2048000
+    rate_limit:
+      mode: static
+      credits_per_minute: 1000
+    access: access/admin.inigo
+    introspection_mode: FULL
+  - name: user
+    max_depth: 5
+    max_height: 100
+    max_operations: 1
+    max_request_size_bytes: 512000
+    max_response_size_bytes: 2048000
+    rate_limit:
+      mode: static
+      credits_per_minute: 1000
+    access: access/user.inigo
+    introspection_mode: BLOCK
+  - name: super
+    max_depth: 5
+    introspection_mode: FULL

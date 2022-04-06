@@ -1,0 +1,9 @@
+query {
+  login
+  logout
+
+  people {
+    name
+    mass
+  }
+}

@@ -1,0 +1,14 @@
+query {
+	login
+	logout
+	version {
+		version
+		date
+		commit
+	}
+}
+
+mutation {
+	userAdd
+	userRemove
+}
