@@ -1,0 +1,80 @@
+schema {
+	query: Query
+	mutation: Mutations
+	subscription: Subscription
+}
+
+type Query {
+	pastes(public: Boolean, limit: Int, filter: String): [PasteObject]
+	paste(id: Int, title: String): PasteObject
+	systemUpdate: String
+	systemDiagnostics(username: String, password: String, cmd: String): String
+	systemDebug(arg: String): String
+	systemHealth: String
+	users(id: Int): [UserObject]
+	readAndBurn(id: Int): PasteObject
+}
+type PasteObject {
+	id: ID!
+	title: String
+	content: String
+	public: Boolean
+	userAgent: String
+	ipAddr: String
+	ownerId: Int
+	burn: Boolean
+	owner: OwnerObject
+}
+
+scalar ID
+scalar String
+scalar Boolean
+scalar Int
+
+type OwnerObject {
+	id: ID!
+	name: String
+	paste: [PasteObject]
+	pastes: [PasteObject]
+}
+type UserObject {
+	id: ID!
+	username(capitalize: Boolean): String
+}
+type Mutations {
+	createPaste(
+		burn: Boolean = false
+		content: String
+		public: Boolean = true
+		title: String
+	): CreatePaste
+	editPaste(content: String, id: Int, title: String): EditPaste
+	deletePaste(id: Int): DeletePaste
+	uploadPaste(content: String!, filename: String!): UploadPaste
+	importPaste(
+		host: String!
+		path: String!
+		port: Int
+		scheme: String!
+	): ImportPaste
+}
+type CreatePaste {
+	paste: PasteObject
+}
+type EditPaste {
+	paste: PasteObject
+}
+type DeletePaste {
+	result: Boolean
+}
+type UploadPaste {
+	content: String
+	filename: String
+	result: String
+}
+type ImportPaste {
+	result: String
+}
+type Subscription {
+	paste(id: Int, title: String): PasteObject
+}

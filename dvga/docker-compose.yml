@@ -1,0 +1,22 @@
+version: "3.9"
+services:
+  dvga:
+    image: dolevf/dvga
+    environment:
+      WEB_HOST: 0.0.0.0
+      WEB_PORT: 5013
+  sidecar:
+    image: inigohub/sidecar:latest
+    ports:
+      - 80:80
+    environment:
+      SIDECAR_LISTEN_PORT: "80"
+      SIDECAR_EGRESS_URL: http://dvga:5013
+      SIDECAR_GRAPHQL_ROUTE: /graphql
+      SIDECAR_INGEST_URL: https://prod.inigolabs.com/ingest/query
+      SIDECAR_SERVICE_URL: https://prod.inigolabs.com/service/query
+      SIDECAR_DEBUG: "false"
+      SIDECAR_ENABLE: "true"
+      SIDECAR_QUERYDATABATCH_TIMEOUT: "3s"
+      SIDECAR_QUERYDATABATCH_MAXSIZE: "10"
+    env_file: service.token
