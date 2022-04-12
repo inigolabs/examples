@@ -1,0 +1,60 @@
+name: dvga
+kind: Service
+spec:
+  path_user_role: jwt.user_role
+  path_user_name: jwt.user_name
+  polling_interval_schema: 300
+  polling_interval_profile: 5
+  schema_files:
+    - ../schema/schema.graphql
+  rate_limit:
+    credits_per_type:
+      UserObject: 10
+  validation:
+    alias_name: "^[a-zA-Z]+$"
+    directive_name: "^[a-zA-Z]+$"
+    operation_name: "^[a-zA-Z]+$"
+    arguments:
+      String: "^[a-zA-Z]+$"
+  profiles:
+    - name: guest
+      max_depth: 5
+      max_height: 5
+      max_directives: 5
+      require_operation_name: true
+      max_request_size_bytes: 512000
+      max_response_size_bytes: 2048000
+      rate_limit:
+        mode: static
+        header_output: true
+        extension_output: true
+        calls_per_minute: 10
+        calls_per_hour: 1000
+        credits_per_minute: 1000
+        credits_per_hour: 10000
+      access:
+        config: access/guest.inigo
+        introspection: PARTIAL
+      pii:
+        - CreditCard
+        - SSN
+    - name: admin
+      max_depth: 5
+      max_height: 100
+      max_request_size_bytes: 512000
+      max_response_size_bytes: 2048000
+      rate_limit:
+        mode: static
+        calls_per_minute: 10
+        credits_per_minute: 1000
+    - name: user
+      max_depth: 5
+      max_height: 100
+      max_request_size_bytes: 512000
+      max_response_size_bytes: 2048000
+      rate_limit:
+        mode: static
+        calls_per_minute: 10
+        credits_per_minute: 1000
+    - name: super
+      max_depth: 5
