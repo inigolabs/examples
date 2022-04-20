@@ -32,7 +32,8 @@ spec:
         credits_per_hour: 10000
       access:
         config: access/guest.inigo
-        introspection: PARTIAL
+        introspection: FULL
+#        introspection: PARTIAL
       pii:
         - CreditCard
         - SSN

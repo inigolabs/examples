@@ -6,7 +6,7 @@ services:
       WEB_HOST: 0.0.0.0
       WEB_PORT: 5013
   sidecar:
-    image: inigohub/sidecar:latest
+    image: inigohub/sidecar:0.5.0
     ports:
       - 80:80
     environment:

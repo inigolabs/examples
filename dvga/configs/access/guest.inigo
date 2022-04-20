@@ -1,3 +1,4 @@
 query {
   users { * }
+  systemHealth
 }
