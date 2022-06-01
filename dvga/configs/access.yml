@@ -1,0 +1,14 @@
+kind: Access
+name: dvga
+spec:
+  unauthenticated_profile: guest
+  unauthenticated_roles: [query]
+
+  roles:
+    - name: viewer
+      config_files:
+        - access/guest.inigo
+
+  profiles:
+    - name: guest
+      introspection_mode: partial

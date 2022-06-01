@@ -29,4 +29,8 @@ query {
 			model
 		}
 	}
+
+	people {
+		name
+	}
 }

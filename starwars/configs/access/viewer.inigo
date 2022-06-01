@@ -1,0 +1,19 @@
+query {
+	login
+	logout
+
+	films
+    people
+}
+
+type Film {
+    title
+    director
+    characters
+}
+
+type Person {
+    name
+    hairColor
+    ssn
+}

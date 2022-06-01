@@ -1,0 +1,28 @@
+kind: Access
+name: starwars
+spec:
+  unauthenticated_profile: guest
+  unauthenticated_roles: 
+    - viewer
+
+  roles:
+    - name: viewer
+      config_files:
+        - access/viewer.inigo
+    - name: director
+      config_files:
+        - access/director.inigo
+    - name: actor
+      config_files:
+        - access/actor.inigo
+    - name: producer
+      config_files:
+        - access/producer.inigo
+
+  profiles:
+    - name: guest
+      introspection_mode: partial
+    - name: user
+      introspection_mode: full
+    - name: admin
+      introspection_mode: full

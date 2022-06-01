@@ -5,13 +5,14 @@ services:
     ports:
       - 81:80 # Remove this to disallow direct access to playground
   sidecar:
-    image: inigohub/sidecar:latest
+    image: inigohub/sidecar:0.7.0
     ports:
       - 80:80
     environment:
       SIDECAR_LISTEN_PORT: 80
-      SIDECAR_EGRESS_URL: http://starwars/query
+      SIDECAR_EGRESS_URL: http://starwars:80/query
       SIDECAR_GRAPHQL_ROUTE: /query
+      SIDECAR_QUERYDATABATCH_MAX_TIME: 5s
+      SIDECAR_QUERYDATABATCH_MAX_COUNT: "50"
+
     env_file: service.token
-
-

@@ -66,7 +66,7 @@ starwars       0         1          Running
 
 ### Apply configs
 ```sh
-> inigo apply configs/service.yml
+> inigo apply configs/*.yml
 > inigo get service
 NAME           PROFILES  INSTANCES  STATUS
 ----           --------  ---------  ------
@@ -76,4 +76,4 @@ starwars       4         1          Running
 ### Play around
 1. Head to localhost:80 to access the example service api graphql playground (see specific details in each example readme)
 2. Login to https://prod.inigolabs.com to access your dashboard 
-3. Start making changes to access files and profiles in the configs directory and run **inigo apply configs/service.yml** for the changes to take effect.
+3. Start making changes to access files and profiles in the configs directory and run **inigo apply configs/*.yml** for the changes to take effect.

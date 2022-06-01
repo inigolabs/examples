@@ -2,9 +2,9 @@ name: dvga
 kind: Service
 spec:
   path_user_role: jwt.user_role
-  path_user_name: jwt.user_name
+  path_user_id: jwt.user_name
   polling_interval_schema: 300
-  polling_interval_profile: 5
+  polling_interval_profile: 2
   rate_limit:
     credits_per_type:
       UserObject: 10
@@ -30,10 +30,6 @@ spec:
         calls_per_hour: 1000
         credits_per_minute: 1000
         credits_per_hour: 10000
-      access:
-        config: access/guest.inigo
-        introspection: FULL
-#        introspection: PARTIAL
       pii:
         - CreditCard
         - SSN
