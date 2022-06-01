@@ -9,7 +9,6 @@ services:
     ports:
       - 80:80
     environment:
-      SIDECAR_LISTEN_PORT: 80
       SIDECAR_EGRESS_URL: http://starwars:80/query
       SIDECAR_GRAPHQL_ROUTE: /query
       SIDECAR_QUERYDATABATCH_MAX_TIME: 5s
